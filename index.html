@@ -8,10 +8,24 @@
   <meta name="description" content="Kodon: analyse codon usage bias (RSCU, codon frequency, CAI) to distinguish highly and lowly expressed genes in E. coli.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=8">
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Baloo+2:wght@400;500;600;700;800&family=Leckerli+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
+  <!-- Icon set: simple green line icons -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-dna" viewBox="0 0 24 24"><path d="M8 3c0 4.5 8 5.5 8 9s-8 4.5-8 9M16 3c0 4.5-8 5.5-8 9s8 4.5 8 9M9.2 6h5.6M9.2 18h5.6M10.6 9.3h2.8M10.6 14.7h2.8"/></symbol>
+      <symbol id="i-bars" viewBox="0 0 24 24"><path d="M4 20h16"/><rect x="5.5" y="11" width="3" height="6" rx="1.5"/><rect x="10.5" y="6" width="3" height="11" rx="1.5"/><rect x="15.5" y="13" width="3" height="4" rx="1.5"/></symbol>
+      <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v15M8 20h8M5 7.5h14M12 4.5a1 1 0 1 0 0-.01"/><path d="M5 7.5 2.5 13a2.5 2.5 0 0 0 5 0L5 7.5ZM19 7.5 16.5 13a2.5 2.5 0 0 0 5 0L19 7.5Z"/></symbol>
+      <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 1 4.9 4 4 4 0 0 1-1.4 7.8h-7A4 4 0 0 1 7.1 7 5 5 0 0 1 12 3Z"/><path d="M12 21v-9M12 14.5l-2.5-2.5M12 13l2-1.5"/></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M11 3.5c.6 4.3 2.7 6.4 7 7-4.3.6-6.4 2.7-7 7-.6-4.3-2.7-6.4-7-7 4.3-.6 6.4-2.7 7-7Z"/><path d="M18.5 15.5c.2 1.4.9 2.1 2.3 2.3-1.4.2-2.1.9-2.3 2.3-.2-1.4-.9-2.1-2.3-2.3 1.4-.2 2.1-.9 2.3-2.3Z"/></symbol>
+      <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 21v-9"/><path d="M12 12c0-4-3-6.5-7.5-6.5 0 4 3 6.5 7.5 6.5Z"/><path d="M12 10c0-3.6 2.6-6.2 7.5-6.2 0 4-2.6 6.2-7.5 6.2Z"/><path d="M8 21h8"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.8"/><circle cx="12" cy="12" r="1.2"/></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7.5 3.5 12 8 16.5M16 7.5l4.5 4.5-4.5 4.5M13.5 5l-3 14"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 19.5s-7-4.3-7-9.6A3.9 3.9 0 0 1 12 7.6a3.9 3.9 0 0 1 7 2.3c0 5.3-7 9.6-7 9.6Z"/><path d="M12 19.5V11.5"/></symbol>
+    </defs>
+  </svg>
   <header class="site-header">
     <nav class="nav">
       <a class="brand" href="#top">kodon</a>
@@ -156,27 +170,27 @@
 
         <ol class="how-steps">
           <li class="how-step">
-            <span class="how-num">1</span><span class="how-icon">🧬</span>
+            <span class="how-num">1</span><span class="how-icon"><svg class="ico" aria-hidden="true"><use href="#i-dna"/></svg></span>
             <h4>Read the gene</h4>
             <p>The DNA sequence is cut into triplets (codons), in frame from the first base.</p>
           </li>
           <li class="how-step">
-            <span class="how-num">2</span><span class="how-icon">🔢</span>
+            <span class="how-num">2</span><span class="how-icon"><svg class="ico" aria-hidden="true"><use href="#i-bars"/></svg></span>
             <h4>Count codons</h4>
             <p>How often each of the 64 codons appears gives <strong>64 codon frequencies</strong>.</p>
           </li>
           <li class="how-step">
-            <span class="how-num">3</span><span class="how-icon">⚖️</span>
+            <span class="how-num">3</span><span class="how-icon"><svg class="ico" aria-hidden="true"><use href="#i-scale"/></svg></span>
             <h4>Compare synonyms</h4>
             <p><strong>RSCU</strong> scores each codon against its synonymous siblings: above 1 = preferred. That's 59 more values, <strong>123 features</strong> in total.</p>
           </li>
           <li class="how-step">
-            <span class="how-num">4</span><span class="how-icon">🌳</span>
+            <span class="how-num">4</span><span class="how-icon"><svg class="ico" aria-hidden="true"><use href="#i-tree"/></svg></span>
             <h4>Ask the forest</h4>
             <p>A <strong>Random Forest</strong> of 200 decision trees, trained in Python with scikit-learn on random samples of genes and features, looks at the 123 features and votes HEG or LEG.</p>
           </li>
           <li class="how-step">
-            <span class="how-num">5</span><span class="how-icon">✨</span>
+            <span class="how-num">5</span><span class="how-icon"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg></span>
             <h4>Give the answer</h4>
             <p>The share of trees voting HEG is <strong>P(HEG)</strong>. 0.5 or more → highly expressed, otherwise lowly expressed.</p>
           </li>
@@ -184,17 +198,17 @@
 
         <div class="grid2">
           <div class="card">
-            <h4>🌱 What it learned from</h4>
+            <h4 class="ico-title"><svg class="ico" aria-hidden="true"><use href="#i-sprout"/></svg>What it learned from</h4>
             <p class="small">214 real <em>E. coli</em> K-12 genes from NCBI: 107 known highly expressed (ribosomal proteins, translation factors, chaperones, energy metabolism) and 107 lowly expressed transcriptional regulators.</p>
           </div>
           <div class="card">
-            <h4>🎯 How well it works</h4>
+            <h4 class="ico-title"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg>How well it works</h4>
             <p class="small">The forest trains on 160 genes and is tested on the other 54 it has never seen. Its score and the codons it relies on most are shown in the <a href="#model">model results</a> below.</p>
           </div>
         </div>
 
         <div class="card python-card">
-          <h4>🐍 Built in Python</h4>
+          <h4 class="ico-title"><svg class="ico" aria-hidden="true"><use href="#i-code"/></svg>Built in Python</h4>
           <p class="small">The whole pipeline is a Jupyter notebook, <a href="https://github.com/ritu-ramesh-dev/kodon/blob/main/notebook/kodon_model.ipynb">kodon_model.ipynb</a>: <strong>Biopython</strong> downloads the genes from NCBI, <strong>pandas</strong> builds the codon features, <strong>scikit-learn</strong> trains and evaluates the Random Forest, and <strong>matplotlib / seaborn</strong> plot the results. The trained trees are exported to this website, which runs them in your browser, so every prediction here comes from the scikit-learn model.</p>
           <ul class="chips"><li>Python</li><li>Biopython</li><li>pandas</li><li>scikit-learn</li><li>matplotlib</li><li>seaborn</li><li>Jupyter / Colab</li></ul>
         </div>
@@ -206,7 +220,7 @@
       <div class="wrap">
         <div class="row between">
           <h2>Random Forest model</h2>
-          <span class="status-pill ready">🐍 trained with scikit-learn</span>
+          <span class="status-pill ready"><svg class="ico ico-sm" aria-hidden="true"><use href="#i-code"/></svg>trained with scikit-learn</span>
         </div>
         <p class="muted" id="mSplit">Loading model…</p>
 
@@ -253,7 +267,7 @@
 
   </main>
 
-  <footer class="footer"><div class="wrap"><span class="footer-logo">kodon</span> · made with 💚 by <strong>Ritu Ramesh</strong> · Codon usage bias &amp; gene expression in E. coli</div></footer>
+  <footer class="footer"><div class="wrap"><span class="footer-logo">kodon</span> · made with <svg class="ico ico-heart" aria-hidden="true"><use href="#i-heart"/></svg> by <strong>Ritu Ramesh</strong> · Codon usage bias &amp; gene expression in E. coli</div></footer>
 
   <div class="portal" id="portal" aria-hidden="true">
     <div class="portal-inner">
