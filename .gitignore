@@ -1,0 +1,4 @@
+data/ecoli_k12_cds.fna
+.ipynb_checkpoints/
+__pycache__/
+.claude/
