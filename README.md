@@ -64,4 +64,8 @@ In Google Colab, upload the notebook and run `!pip install biopython` first.
 
 Made by Ritu Ramesh.
 
+## License
+
+The code is released under the [MIT License](LICENSE). The opening film is not part of this repository and stays under its own Pexels license (see below).
+
 Opening film: ["A foggy forest with trees and fog" on Pexels](https://www.pexels.com/video/a-foggy-forest-with-trees-and-fog-17428163/) (free Pexels License), streamed from videos.pexels.com.
