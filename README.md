@@ -60,8 +60,8 @@ In Google Colab, upload the notebook and run `!pip install biopython` first.
 | `index.html` | Page content (opening, analyzer, how it works, model results) |
 | `style.css` | Look and colours |
 | `app.js` | Feature calculation in the browser and prediction with the exported forest |
-| `intro.js` | Forest-world scroll opening, scroll reveals and analyzer transition |
+| `intro.js` | Cinematic opening (film, drifting mist, grain, scroll fly-through), scroll reveals and analyzer transition |
 
 Made by Ritu Ramesh.
 
-Forest photos: [Unsplash](https://unsplash.com) (free Unsplash License), loaded from images.unsplash.com.
+Opening film: ["A foggy forest with trees and fog" on Pexels](https://www.pexels.com/video/a-foggy-forest-with-trees-and-fog-17428163/) (free Pexels License), streamed from videos.pexels.com.

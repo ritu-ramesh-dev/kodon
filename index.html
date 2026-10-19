@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,0..100,0..1&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
   <!-- Icon set: simple green line icons -->
@@ -40,13 +40,19 @@
     </nav>
   </header>
 
-  <!-- OPENING: a real forest "world" rises, slides aside, then the camera dives into the canopy -->
-  <section class="stage" id="intro" aria-label="Kodon">
-    <div class="stage-sticky">
-      <div class="pollen" aria-hidden="true"><i style="--x:8%;--y:22%;--t:9s;--s:3px"></i><i style="--x:17%;--y:64%;--t:12s;--s:2px"></i><i style="--x:26%;--y:38%;--t:10s;--s:3px"></i><i style="--x:34%;--y:80%;--t:14s;--s:2px"></i><i style="--x:43%;--y:16%;--t:11s;--s:2px"></i><i style="--x:57%;--y:30%;--t:13s;--s:3px"></i><i style="--x:66%;--y:72%;--t:9s;--s:2px"></i><i style="--x:74%;--y:18%;--t:12s;--s:3px"></i><i style="--x:83%;--y:52%;--t:10s;--s:2px"></i><i style="--x:91%;--y:34%;--t:15s;--s:3px"></i><i style="--x:12%;--y:88%;--t:11s;--s:2px"></i><i style="--x:48%;--y:58%;--t:16s;--s:2px"></i><i style="--x:62%;--y:90%;--t:10s;--s:3px"></i><i style="--x:95%;--y:76%;--t:13s;--s:2px"></i></div>
+  <!-- OPENING: a cinematic fly-through of a misty pine forest -->
+  <section class="cine" id="intro" aria-label="Kodon">
+    <div class="cine-sticky">
+      <div class="cine-frame" data-cine="frame">
+        <video class="cine-video" data-cine="video" muted playsinline loop autoplay preload="auto" poster="https://images.pexels.com/videos/17428163/pexels-photo-17428163.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920"
+          data-src-hd="https://videos.pexels.com/video-files/17428163/17428163-hd_1920_1080_50fps.mp4"
+          data-src-sd="https://videos.pexels.com/video-files/17428163/17428163-hd_1280_720_50fps.mp4"></video>
+      </div>
+      <canvas class="mist mist-back" data-mist="back" aria-hidden="true"></canvas>
+      <div class="rays" aria-hidden="true"><i></i><i></i><i></i></div>
 
-      <div class="stage-center" data-move="center">
-          <svg class="logo" viewBox="0 0 640 280" role="img" aria-label="kodon">
+      <div class="cine-title" data-cine="title">
+        <svg class="logo" viewBox="0 0 640 280" role="img" aria-label="kodon">
             <defs>
               <filter id="goo" x="-10%" y="-20%" width="120%" height="140%">
                 <feTurbulence type="fractalNoise" baseFrequency="0.004 0.03" numOctaves="1" seed="11">
@@ -88,38 +94,21 @@
               <circle class="ring pop float" style="--d:2s" cx="236" cy="238" r="7"/>
             </g>
           </svg>
-        <p class="stage-tag">reading the codon code of gene expression</p>
+        <p class="cine-tag">reading the codon code of gene expression</p>
         <a class="btn btn-light" href="#analyzer" data-open-analyzer>Open the analyzer</a>
       </div>
 
-      <a class="side-world side-left" href="#how" data-move="left" aria-label="How it works">
-        <span class="side-orb"><img src="https://images.unsplash.com/photo-1508144322886-717c284ab392?w=500&amp;h=500&amp;fit=crop&amp;q=70&amp;auto=format" alt=""></span>
-        <span class="side-label">How it works</span>
-      </a>
-      <a class="side-world side-right" href="#model" data-move="right" aria-label="Model">
-        <span class="side-label">Model</span>
-        <span class="side-orb"><img src="https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=500&amp;h=500&amp;fit=crop&amp;q=70&amp;auto=format" alt=""></span>
-      </a>
+      <p class="cine-line" data-line="0">Every gene is written in <em>codons</em>.</p>
+      <p class="cine-line" data-line="1">The busiest genes choose theirs like a well-kept forest: the same favourites, again and again.</p>
+      <p class="cine-line" data-line="2">Kodon learns those habits, and reads them back from any gene.</p>
 
-      <div class="stage-left" data-move="copy">
-        <p class="kicker">The green planet</p>
-        <h2>Kodon</h2>
-        <p>Every gene is written in codons, and the busiest genes in a cell choose their codons like a well-kept forest: neat, fast, and always the same favourites. Kodon reads those habits from any <em>E. coli</em> gene and tells you whether it is likely to be highly or lowly expressed.</p>
-        <a class="btn btn-light" href="#how">How it works</a>
-      </div>
-
-      <div class="world" data-move="world">
-        <div class="world-spin">
-          <img src="https://images.unsplash.com/photo-1498925008800-019c7d59d903?w=2200&amp;h=2200&amp;fit=crop&amp;q=72&amp;auto=format" alt="A dense green forest seen from above">
-        </div>
-      </div>
-
-      <div class="stage-final" data-move="final">
-        <span class="final-rule"></span>
-        <p>Down in the canopy, every tree is a gene and every leaf a codon. A Random Forest of 200 decision trees, trained in Python on real NCBI genes, learns which codons the highly expressed genes prefer.</p>
-      </div>
-
-      <a class="scroll-cue" href="#top" data-move="cue" aria-label="Scroll down"><i></i></a>
+      <canvas class="mist mist-front" data-mist="front" aria-hidden="true"></canvas>
+      <div class="vignette" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+      <div class="fade-out" data-cine="fade" aria-hidden="true"></div>
+      <div class="lbox lbox-top" data-cine="bar" aria-hidden="true"></div>
+      <div class="lbox lbox-bottom" data-cine="bar" aria-hidden="true"></div>
+      <a class="scroll-cue" href="#top" data-cine="cue" aria-label="Scroll down"><span>scroll</span><i></i></a>
     </div>
   </section>
 
@@ -286,7 +275,7 @@
     </section>
   </main>
 
-  <footer class="footer"><div class="wrap"><span class="footer-logo">kodon</span> · made with <svg class="ico ico-heart" aria-hidden="true"><use href="#i-heart"/></svg> by <strong>Ritu Ramesh</strong> · Codon usage bias &amp; gene expression in E. coli · Forest photos from <a href="https://unsplash.com/photos/bird-eye-view-photography-of-a-green-trees-uMWPrcRsrto">Unsplash</a></div></footer>
+  <footer class="footer"><div class="wrap"><span class="footer-logo">kodon</span> · made with <svg class="ico ico-heart" aria-hidden="true"><use href="#i-heart"/></svg> by <strong>Ritu Ramesh</strong> · Codon usage bias &amp; gene expression in E. coli · Forest film from <a href="https://www.pexels.com/video/a-foggy-forest-with-trees-and-fog-17428163/">Pexels</a></div></footer>
 
   <div class="portal" id="portal" aria-hidden="true">
     <div class="portal-inner">
@@ -300,7 +289,7 @@
     </div>
   </div>
 
-  <script src="intro.js?v=14"></script>
+  <script src="intro.js?v=20"></script>
   <script src="model-data.js?v=13"></script>
   <script src="app.js?v=13"></script>
 </body>
