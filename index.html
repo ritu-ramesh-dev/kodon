@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,0..100,0..1&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="stylesheet" href="style.css?v=20">
+  <link rel="stylesheet" href="style.css?v=23">
 </head>
 <body>
   <!-- Icon set: simple green line icons -->
@@ -25,23 +25,25 @@
       <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.8"/><circle cx="12" cy="12" r="1.2"/></symbol>
       <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7.5 3.5 12 8 16.5M16 7.5l4.5 4.5-4.5 4.5M13.5 5l-3 14"/></symbol>
       <symbol id="i-split" viewBox="0 0 24 24"><path d="M12 3v6M12 9 6 15v6M12 9l6 6v6"/><circle cx="12" cy="3" r="1"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5"/><path d="M6.5 10v9h11v-9"/><path d="M10.5 19v-4.5h3V19"/></symbol>
       <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 19.5s-7-4.3-7-9.6A3.9 3.9 0 0 1 12 7.6a3.9 3.9 0 0 1 7 2.3c0 5.3-7 9.6-7 9.6Z"/><path d="M12 19.5V11.5"/></symbol>
     </defs>
   </svg>
 
   <header class="site-header">
     <nav class="nav">
-      <a class="brand" href="#top">kodon</a>
+      <a class="brand" href="#home" aria-label="Kodon home">kodon</a>
       <div class="nav-links">
-        <a href="#analyzer" data-open-analyzer>Analyzer</a>
-        <a href="#how">How it works</a>
-        <a href="#model">Model</a>
+        <a class="nav-home" href="#home" data-nav="home" aria-label="Home"><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>Home</a>
+        <a href="#analyzer" data-nav="analyzer" data-open-analyzer>Analyzer</a>
+        <a href="#how" data-nav="how">How it works</a>
+        <a href="#model" data-nav="model">Model</a>
       </div>
     </nav>
   </header>
 
   <!-- OPENING: a cinematic fly-through of a misty pine forest -->
-  <section class="cine" id="intro" aria-label="Kodon">
+  <section class="cine" id="intro" aria-label="Kodon" data-view="home">
     <div class="cine-sticky">
       <div class="cine-frame" data-cine="frame">
         <video class="cine-video" data-cine="video" muted playsinline loop autoplay preload="auto" poster="https://images.pexels.com/videos/17428163/pexels-photo-17428163.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920"
@@ -113,17 +115,21 @@
   </section>
 
   <main id="top">
-    <section class="hero">
+    <section class="hero" data-view="home">
       <div class="wrap">
         <h1 class="reveal">Machine-learning analysis of codon usage bias to distinguish highly and lowly expressed genes in prokaryotes</h1>
         <p class="lead reveal" style="--d:.1s">Paste an E. coli coding sequence (or a FASTA file of many genes). Kodon computes codon frequency, RSCU and CAI in your browser, and a Random Forest trained in Python on NCBI E. coli genes predicts whether the gene is <strong>highly expressed (HEG)</strong> or <strong>lowly expressed (LEG)</strong>.</p>
-        <a class="btn btn-light reveal" style="--d:.2s" href="#analyzer" data-open-analyzer>Open the analyzer</a>
+        <div class="hero-actions reveal" style="--d:.2s">
+          <a class="btn btn-light" href="#analyzer" data-open-analyzer>Open the analyzer</a>
+          <a class="hero-link" href="#how">How it works <span aria-hidden="true">→</span></a>
+          <a class="hero-link" href="#model">Model results <span aria-hidden="true">→</span></a>
+        </div>
       </div>
       <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C240 80 480 0 720 30 S1200 80 1440 30 V80 H0Z"/></svg>
     </section>
 
-    <!-- ANALYZER (hidden until "Open the analyzer" is clicked) -->
-    <section id="analyzer" class="section" hidden>
+    <!-- ANALYZER PAGE -->
+    <section id="analyzer" class="section page" data-view="analyzer">
       <div class="wrap">
         <h2 class="reveal">Gene analyzer</h2>
         <p class="muted reveal" style="--d:.05s">Input is read in frame from the first base. RNA (U) is converted to DNA (T). Nothing is uploaded: all calculation happens on this page.</p>
@@ -180,8 +186,8 @@
       </div>
     </section>
 
-    <!-- HOW IT WORKS -->
-    <section id="how" class="section">
+    <!-- HOW IT WORKS PAGE -->
+    <section id="how" class="section page" data-view="how">
       <div class="wrap">
         <h2 class="reveal">How Kodon works</h2>
         <p class="lead-sm reveal" style="--d:.05s">Most amino acids can be written by several codons. Genes that a cell makes in large amounts (HEG) lean heavily on the "fast" codons that match its most plentiful tRNAs, while rarely made genes (LEG) use codons more randomly. Kodon learns these habits and reads them back from any gene.</p>
@@ -231,8 +237,8 @@
       </div>
     </section>
 
-    <!-- MODEL -->
-    <section id="model" class="section alt">
+    <!-- MODEL PAGE -->
+    <section id="model" class="section alt page" data-view="model">
       <div class="wrap">
         <h2 class="reveal">Random Forest model</h2>
         <p class="muted reveal" style="--d:.05s" id="mSplit">Loading model…</p>
@@ -289,7 +295,7 @@
     </div>
   </div>
 
-  <script src="intro.js?v=20"></script>
+  <script src="intro.js?v=23"></script>
   <script src="model-data.js?v=13"></script>
   <script src="app.js?v=13"></script>
 </body>

@@ -1,3 +1,31 @@
+// Pages: the site is split into Home, Analyzer, How it works and Model.
+// Only one [data-view] is shown at a time; the address (#home, #analyzer, ...) picks it,
+// so links, the Home button and the browser's back button all work.
+(function () {
+  const VIEWS = { home: "Kodon", analyzer: "Analyzer · Kodon", how: "How it works · Kodon", model: "Model · Kodon" };
+  const parts = document.querySelectorAll("[data-view]");
+  const navLinks = document.querySelectorAll("[data-nav]");
+
+  function show(name) {
+    if (!(name in VIEWS)) return false;
+    parts.forEach(el => { el.hidden = el.dataset.view !== name; });
+    document.body.dataset.view = name;
+    navLinks.forEach(a => a.dataset.nav === name ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+    document.title = VIEWS[name];
+    const html = document.documentElement, prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto"; window.scrollTo(0, 0); html.style.scrollBehavior = prev;
+    window.dispatchEvent(new Event("resize"));            // lets the opening re-measure itself
+    const film = document.querySelector(".cine-video");
+    if (film) { if (name === "home") film.play().catch(() => {}); else film.pause(); }
+    setTimeout(() => window.kodonRevealCheck && window.kodonRevealCheck(), 30);
+    return true;
+  }
+  window.kodonShow = show;
+
+  window.addEventListener("hashchange", () => show(location.hash.slice(1)));
+  if (!show(location.hash.slice(1))) show("home");
+})();
+
 // Opening: a cinematic fly-through of a misty pine forest.
 //   - a real forest film plays full screen behind letterbox bars
 //   - two layers of drifting mist (one behind the title, one in front), soft light rays, film grain
@@ -13,7 +41,9 @@
 
   // ----- film: pick a size that suits the screen -----
   video.src = window.innerWidth > 1100 ? video.dataset.srcHd : video.dataset.srcSd;
-  if (reduce) video.removeAttribute("autoplay"); else video.play().catch(() => {});
+  if (reduce) video.removeAttribute("autoplay");
+  else if (document.body.dataset.view === "home") video.play().catch(() => {});
+  else video.pause();
 
   // ----- scroll timeline -----
   const clamp = x => Math.min(1, Math.max(0, x));
@@ -143,18 +173,18 @@
     html.style.scrollBehavior = prev;
   }
 
-  function reveal() { analyzer.hidden = false; if (window.kodonRevealCheck) setTimeout(window.kodonRevealCheck, 0); }
-
-  // A direct link to #analyzer opens it straight away
-  if (location.hash === "#analyzer") {
-    reveal();
-    window.addEventListener("load", () => setTimeout(() => jumpTo(analyzer), 50));
+  // switch to the Analyzer page (and record it in the address bar so Back returns here)
+  function reveal() {
+    if (location.hash !== "#analyzer") history.pushState(null, "", "#analyzer");
+    window.kodonShow("analyzer");
   }
 
   async function open(e) {
     e.preventDefault();
     if (busy) return;
-    if (reduce.matches) { reveal(); jumpTo(analyzer); document.getElementById("seq").focus({ preventScroll: true }); return; }
+    const seq = document.getElementById("seq");
+    if (document.body.dataset.view === "analyzer") { jumpTo(analyzer); seq.focus({ preventScroll: true }); return; }
+    if (reduce.matches) { reveal(); seq.focus({ preventScroll: true }); return; }
     busy = true;
     const r = e.currentTarget.getBoundingClientRect();
     portal.style.setProperty("--x", `${r.left + r.width / 2}px`);
@@ -164,7 +194,6 @@
     portal.classList.add("in");
     await wait(1150);
     reveal();
-    jumpTo(analyzer);
     analyzer.classList.remove("arrive");
     void analyzer.offsetWidth;
     analyzer.classList.add("arrive");
