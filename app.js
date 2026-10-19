@@ -116,7 +116,8 @@ const featureVector = r => [...ALL_CODONS.map(c => r.freq[c]), ...RSCU_CODONS.ma
 // Each tree is stored as arrays: split feature f, threshold t, children l / r, leaf probability p.
 function treeProba(tree, x) {
   let node = 0;
-  while (tree.f[node] !== -1) node = x[tree.f[node]] <= tree.t[node] ? tree.l[node] : tree.r[node];
+  // scikit-learn compares features as 32-bit floats, so round the same way
+  while (tree.f[node] !== -1) node = Math.fround(x[tree.f[node]]) <= tree.t[node] ? tree.l[node] : tree.r[node];
   return tree.p[node];
 }
 const forestProba = x => KODON_MODEL.trees.reduce((s, tree) => s + treeProba(tree, x), 0) / KODON_MODEL.trees.length;
@@ -262,6 +263,7 @@ const testGenes = KODON_MODEL.testGenes;
 
 function renderModel() {
   const m = KODON_MODEL.metrics;
+  document.querySelectorAll("[data-k]").forEach(el => { el.textContent = KODON_MODEL[el.dataset.k]; });
   const f = x => (x * 100).toFixed(1) + "%";
   $("mAcc").textContent = f(m.accuracy);
   $("mF1").textContent = m.f1.toFixed(3);
@@ -269,7 +271,7 @@ function renderModel() {
   $("mRec").textContent = f(m.recall);
   $("mCai").textContent = f(KODON_MODEL.caiAccuracy);
   $("mCv").textContent = `${f(KODON_MODEL.cvAccuracy[0])} ± ${(KODON_MODEL.cvAccuracy[1] * 100).toFixed(1)}`;
-  $("mSplit").textContent = `${KODON_MODEL.nTrain} training genes · ${KODON_MODEL.nTest} test genes · ${KODON_MODEL.trees.length} trees · trained with ${KODON_MODEL.trainedWith}`;
+  $("mSplit").textContent = `Trained on ${KODON_MODEL.nTrain} genes, tested on ${KODON_MODEL.nTest} separate genes · ${KODON_MODEL.trees.length} trees · ${KODON_MODEL.trainedWith}`;
   $("cmTP").textContent = m.tp; $("cmFN").textContent = m.fn;
   $("cmFP").textContent = m.fp; $("cmTN").textContent = m.tn;
 

@@ -46,7 +46,7 @@
     html.style.scrollBehavior = prev;
   }
 
-  function reveal() { analyzer.hidden = false; }
+  function reveal() { analyzer.hidden = false; if (window.kodonRevealCheck) setTimeout(window.kodonRevealCheck, 0); }
 
   // A direct link to #analyzer opens it straight away
   if (location.hash === "#analyzer") {
@@ -79,4 +79,27 @@
   }
 
   document.querySelectorAll("[data-open-analyzer]").forEach(a => a.addEventListener("click", open));
+})();
+
+// Scroll reveals: each .reveal element slides up out of a mask the first time it enters the screen.
+// (Positions are checked on scroll: IntersectionObserver ignores elements whose mask hides them.)
+(function () {
+  let pending = [...document.querySelectorAll(".reveal")];
+  let ticking = false;
+  function check() {
+    ticking = false;
+    const limit = window.innerHeight * 0.92;
+    pending = pending.filter(el => {
+      if (el.offsetParent === null) return true;           // hidden (e.g. analyzer not opened yet)
+      if (el.getBoundingClientRect().top < limit) { el.classList.add("in"); return false; }
+      return true;
+    });
+  }
+  const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(check); } };
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", queue);
+  window.kodonRevealCheck = queue;
+  check();
+  // safety net for jumps that skip scroll events (anchor links, instant scrolls)
+  const timer = setInterval(() => { if (!pending.length) clearInterval(timer); else check(); }, 400);
 })();
