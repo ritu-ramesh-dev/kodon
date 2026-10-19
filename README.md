@@ -60,6 +60,8 @@ In Google Colab, upload the notebook and run `!pip install biopython` first.
 | `index.html` | Page content (opening, analyzer, how it works, model results) |
 | `style.css` | Look and colours |
 | `app.js` | Feature calculation in the browser and prediction with the exported forest |
-| `intro.js` | Scroll-down opening and analyzer transition |
+| `intro.js` | Forest-world scroll opening, scroll reveals and analyzer transition |
 
 Made by Ritu Ramesh.
+
+Forest photos: [Unsplash](https://unsplash.com) (free Unsplash License), loaded from images.unsplash.com.

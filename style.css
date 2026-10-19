@@ -7,6 +7,7 @@
   --tan: #cfbb99;
   --bone: #e5d7c4;
   --paper: #eee4d5;        /* lighter bone for input fields */
+  --night: #1f2716;        /* deep forest night, a darker kombu */
 
   --bg: var(--bone);
   --text: var(--kombu);
@@ -68,17 +69,15 @@ body.past-intro .site-header { transform: none; }
 .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; background: var(--kombu); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
 .nav-links a:hover::after { transform: scaleX(1); }
 
-/* ---------- opening: parallax hills ---------- */
-.intro { height: 230vh; position: relative; background: var(--bone); }
-.intro-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-.intro-title {
-  position: absolute; inset: 0; z-index: 2;
-  display: flex; flex-direction: column; align-items: center;
-  padding: 9vh 16px 0; text-align: center;
-  transform: translateY(calc(var(--p, 0) * -12vh)) scale(calc(1 - var(--p, 0) * .12));
-  will-change: transform;
+/* ---------- opening: a real forest world (positions are driven by intro.js) ---------- */
+.stage { height: 420vh; position: relative; background: var(--night); }
+.stage-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--night); color: var(--bone); }
+
+.stage-center {
+  position: absolute; left: 50%; top: 6vh; z-index: 3; width: min(92vw, 720px); text-align: center;
+  transform: translate(-50%, var(--ty, 0px)); will-change: transform;
 }
-.logo { width: min(78vw, 640px, 88vh); height: auto; color: var(--kombu); overflow: visible; }
+.logo { width: min(70vw, 520px, 66vh); height: auto; color: var(--bone); overflow: visible; display: block; margin: 0 auto; }
 .logo text { font-family: "Bagel Fat One", var(--font-title); font-size: 160px; fill: currentColor; text-anchor: middle; }
 .ltr { transform-box: fill-box; transform-origin: 50% 100%; visibility: hidden; }
 .intro-ready .ltr { visibility: visible; animation: drop 1.1s var(--ease) both; animation-delay: calc(var(--i) * .1s + .1s); }
@@ -90,7 +89,7 @@ body.past-intro .site-header { transform: none; }
 }
 .deco { fill: none; stroke: currentColor; stroke-width: 4.5; stroke-linecap: round; }
 .deco .leaf, .deco .blob { fill: var(--moss); stroke: none; }
-.deco .vein { stroke: var(--bone); stroke-width: 3; }
+.deco .vein { stroke: var(--night); stroke-width: 3; }
 .deco .ring { stroke-width: 4; }
 .draw { stroke-dasharray: 90; stroke-dashoffset: 90; }
 .intro-ready .draw { animation: draw .8s var(--ease) forwards; animation-delay: var(--d); }
@@ -101,24 +100,60 @@ body.past-intro .site-header { transform: none; }
 @keyframes pop { to { transform: scale(1); } }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 
-.intro-tag { font-family: var(--font-body); font-style: italic; font-size: clamp(1.05rem, 2.3vw, 1.35rem); color: var(--noir); margin: 2px 0 18px; }
-.intro-tag span, .scroll-cue { display: inline-block; clip-path: inset(0 0 100% 0); transform: translateY(14px); }
-.intro-ready .intro-tag span { animation: rise .9s var(--ease) 1.5s forwards; }
-.intro-ready .scroll-cue { animation: rise .9s var(--ease) 2s forwards; }
-@keyframes rise { to { clip-path: inset(-10% -10% -10% -10%); transform: none; } }
-.scroll-cue { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: var(--noir); font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; }
-.scroll-cue i { width: 24px; height: 38px; border: 2px solid var(--kombu); border-radius: 999px; position: relative; }
-.scroll-cue i::after { content: ""; position: absolute; left: 50%; top: 7px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: var(--kombu); animation: wheel 1.8s var(--ease) infinite; }
+.stage-tag { font-style: italic; font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--tan); margin: 0 0 18px; }
+.stage-tag, .stage-center .btn { clip-path: inset(0 0 100% 0); transform: translateY(14px); }
+.intro-ready .stage-tag { animation: rise .9s var(--ease) 1.5s forwards; }
+.intro-ready .stage-center .btn { animation: rise .9s var(--ease) 1.8s forwards; }
+@keyframes rise { to { clip-path: inset(-12px); transform: none; } }
+
+/* the big forest world: a real canopy photo, slowly turning */
+.world {
+  position: absolute; left: 0; top: 0; z-index: 2; border-radius: 50%; overflow: hidden;
+  transform-origin: 50% 50%; will-change: transform; background: var(--kombu);
+}
+.world-spin { width: 100%; height: 100%; animation: spin 160s linear infinite; }
+.world img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(calc(1 - var(--dim, 0) * .55)) saturate(1.05); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* smaller worlds peeking in from the edges */
+.side-world { position: absolute; top: 47vh; z-index: 2; display: flex; align-items: center; gap: 18px; text-decoration: none; color: var(--tan); will-change: transform; }
+.side-left { left: -9vh; transform: translate(var(--tx, 0px), -50%); }
+.side-right { right: -9vh; transform: translate(var(--tx, 0px), -50%); }
+.side-orb { width: 18vh; height: 18vh; border-radius: 50%; overflow: hidden; display: block; flex: none; transition: transform .5s var(--ease); }
+.side-orb img { width: 100%; height: 100%; object-fit: cover; display: block; animation: spin 120s linear infinite; }
+.side-world:hover .side-orb { transform: scale(1.08); }
+.side-label { font-family: var(--font-title); font-variation-settings: "SOFT" 100, "WONK" 1; font-weight: 700; font-size: .85rem; letter-spacing: .22em; text-transform: uppercase; }
+
+/* story text that slides in beside the world */
+.stage-left {
+  position: absolute; left: max(16px, 7vw); top: 50%; z-index: 1; width: min(440px, 40vw);
+  transform: translate(var(--tx, -120vw), -50%); will-change: transform;
+}
+.stage-left .kicker { font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; color: var(--moss); margin: 0 0 6px; }
+.stage-left h2 { color: var(--bone); font-size: clamp(3rem, 7vw, 5.2rem); margin: 0 0 .2em; }
+.stage-left p { color: var(--tan); margin: 0 0 22px; }
+
+/* caption over the full-screen forest */
+.stage-final { position: absolute; right: 7vw; bottom: 11vh; z-index: 4; width: min(460px, 86vw); text-align: right; transform: translateY(var(--ty, 70vh)); will-change: transform; }
+.stage-final p { margin: 0; color: var(--bone); font-size: 1.12rem; }
+.final-rule { display: block; width: 64px; height: 2px; background: var(--tan); margin: 0 0 16px auto; }
+
+/* drifting pollen */
+.pollen { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.pollen i { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s); border-radius: 50%; background: var(--tan); animation: drift var(--t) ease-in-out infinite alternate; }
+@keyframes drift { from { transform: translate(0, 0) scale(.6); } to { transform: translate(18px, -26px) scale(1.2); } }
+
+.scroll-cue { position: absolute; left: 50%; bottom: 3.5vh; z-index: 5; transform: translate(-50%, var(--ty, 0px)); }
+.scroll-cue i { display: block; width: 24px; height: 38px; border: 2px solid var(--tan); border-radius: 999px; position: relative; }
+.scroll-cue i::after { content: ""; position: absolute; left: 50%; top: 7px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: var(--tan); animation: wheel 1.8s var(--ease) infinite; }
 @keyframes wheel { 0% { transform: translateY(0) scale(1); } 70% { transform: translateY(15px) scale(.4); } 100% { transform: translateY(0) scale(1); } }
 
-/* each hill layer = a crest (svg) + a solid block below, rising at its own speed */
-.layer { position: absolute; left: 0; right: 0; top: var(--top); will-change: transform; transform: translateY(calc(var(--p, 0) * var(--rise))); }
-.layer svg { display: block; width: 100%; height: 20vh; fill: currentColor; }
-.layer::after { content: ""; display: block; height: 130vh; margin-top: -1px; background: currentColor; }
-.l-far   { --top: 54vh; --rise: -8vh;   color: var(--tan);   z-index: 1; }
-.l-mid   { --top: 63vh; --rise: -28vh;  color: var(--moss);  z-index: 3; }
-.l-near  { --top: 73vh; --rise: -46vh;  color: var(--noir);  z-index: 4; }
-.l-front { --top: 92vh; color: var(--kombu); z-index: 5; transform: translateY(calc(max(0, var(--p, 0) - .4) * -187vh)); }
+@media (max-width: 760px) {
+  .stage-left { width: auto; right: 16px; top: 8vh; transform: translate(var(--tx, -120vw), 0); }
+  .side-orb { width: 13vh; height: 13vh; }
+  .side-left { left: -6.5vh; } .side-right { right: -6.5vh; }
+  .side-label { display: none; }
+}
 
 /* ---------- hero (continues the front hill's colour) ---------- */
 .hero { position: relative; background: var(--kombu); color: var(--bone); padding: 40px 0 120px; }
@@ -280,8 +315,6 @@ table.cm td.bad { color: var(--leg); }
 
 @media (max-width: 640px) {
   .nav-links { margin-left: 0; gap: 16px; }
-  .intro-title { padding-top: 16vh; }
-  .logo { width: 94vw; }
   .section { padding: 52px 0; }
   .step { grid-template-columns: 48px 1fr; }
   .step-ico { display: none; }
@@ -290,7 +323,8 @@ table.cm td.bad { color: var(--leg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ltr, .pop, .draw, .intro-tag span, .scroll-cue { animation: none !important; visibility: visible; transform: none; clip-path: none; stroke-dashoffset: 0; }
+  .ltr, .pop, .draw, .stage-tag, .stage-center .btn { animation: none !important; visibility: visible; transform: none; clip-path: none; stroke-dashoffset: 0; }
+  .world-spin, .side-orb img, .pollen i { animation: none; }
   .js .reveal { clip-path: none; transform: none; transition: none; }
   .scroll-cue i::after { animation: none; }
   .portal { display: none; }

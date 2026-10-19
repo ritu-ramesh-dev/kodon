@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,0..100,0..1&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="stylesheet" href="style.css?v=13">
+  <link rel="stylesheet" href="style.css?v=15">
 </head>
 <body>
   <!-- Icon set: simple green line icons -->
@@ -40,60 +40,86 @@
     </nav>
   </header>
 
-  <!-- OPENING: parallax hills rise over the title as you scroll -->
-  <section class="intro" id="intro" aria-label="Kodon">
-    <div class="intro-sticky">
-      <div class="intro-title">
-        <svg class="logo" viewBox="0 0 640 280" role="img" aria-label="kodon">
-          <defs>
-            <filter id="goo" x="-10%" y="-20%" width="120%" height="140%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.004 0.03" numOctaves="1" seed="11">
-                <animate attributeName="baseFrequency" dur="9s" values="0.004 0.03;0.005 0.024;0.004 0.03" repeatCount="indefinite"/>
-              </feTurbulence>
-              <feDisplacementMap in="SourceGraphic" scale="18" result="d"/>
-              <feGaussianBlur in="d" stdDeviation="2.5" result="b"/>
-              <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10"/>
-            </filter>
-            <filter id="goo-sm" x="-10%" y="-30%" width="120%" height="160%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.02 0.12" numOctaves="1" seed="11"/>
-              <feDisplacementMap in="SourceGraphic" scale="3.5" result="d"/>
-              <feGaussianBlur in="d" stdDeviation="0.6" result="b"/>
-              <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"/>
-            </filter>
-          </defs>
-          <g class="word" filter="url(#goo)">
-            <text class="ltr" style="--i:0" x="140.5" y="190">k</text>
-            <text class="ltr" style="--i:1" x="232.5" y="190">o</text>
-            <text class="ltr" style="--i:2" x="323.5" y="190">d</text>
-            <text class="ltr" style="--i:3" x="414.5" y="190">o</text>
-            <text class="ltr" style="--i:4" x="503" y="190">n</text>
-          </g>
-          <g class="deco">
-            <path class="leaf pop" style="--d:1.2s" d="M84,150 Q72,122 46,124 Q56,146 84,150Z M84,150 Q72,178 46,176 Q56,154 84,150Z"/>
-            <path class="stem draw" style="--d:1.3s" d="M117,70 C115,52 106,42 97,38"/>
-            <circle class="ring pop" style="--d:1.7s" cx="92" cy="33" r="7"/>
-            <circle class="ring pop float" style="--d:1.5s" cx="232" cy="80" r="8"/>
-            <path class="stem draw" style="--d:1.4s" d="M357,70 C357,52 347,43 337,39"/>
-            <circle class="ring pop" style="--d:1.8s" cx="331" cy="34" r="7"/>
-            <g class="pop" style="--d:1.6s">
-              <path class="leaf" d="M373,72 Q366,36 406,20 Q410,58 373,72Z"/>
-              <path class="vein" d="M377,66 Q388,46 401,28"/>
+  <!-- OPENING: a real forest "world" rises, slides aside, then the camera dives into the canopy -->
+  <section class="stage" id="intro" aria-label="Kodon">
+    <div class="stage-sticky">
+      <div class="pollen" aria-hidden="true"><i style="--x:8%;--y:22%;--t:9s;--s:3px"></i><i style="--x:17%;--y:64%;--t:12s;--s:2px"></i><i style="--x:26%;--y:38%;--t:10s;--s:3px"></i><i style="--x:34%;--y:80%;--t:14s;--s:2px"></i><i style="--x:43%;--y:16%;--t:11s;--s:2px"></i><i style="--x:57%;--y:30%;--t:13s;--s:3px"></i><i style="--x:66%;--y:72%;--t:9s;--s:2px"></i><i style="--x:74%;--y:18%;--t:12s;--s:3px"></i><i style="--x:83%;--y:52%;--t:10s;--s:2px"></i><i style="--x:91%;--y:34%;--t:15s;--s:3px"></i><i style="--x:12%;--y:88%;--t:11s;--s:2px"></i><i style="--x:48%;--y:58%;--t:16s;--s:2px"></i><i style="--x:62%;--y:90%;--t:10s;--s:3px"></i><i style="--x:95%;--y:76%;--t:13s;--s:2px"></i></div>
+
+      <div class="stage-center" data-move="center">
+          <svg class="logo" viewBox="0 0 640 280" role="img" aria-label="kodon">
+            <defs>
+              <filter id="goo" x="-10%" y="-20%" width="120%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.004 0.03" numOctaves="1" seed="11">
+                  <animate attributeName="baseFrequency" dur="9s" values="0.004 0.03;0.005 0.024;0.004 0.03" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" scale="18" result="d"/>
+                <feGaussianBlur in="d" stdDeviation="2.5" result="b"/>
+                <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10"/>
+              </filter>
+              <filter id="goo-sm" x="-10%" y="-30%" width="120%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02 0.12" numOctaves="1" seed="11"/>
+                <feDisplacementMap in="SourceGraphic" scale="3.5" result="d"/>
+                <feGaussianBlur in="d" stdDeviation="0.6" result="b"/>
+                <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"/>
+              </filter>
+            </defs>
+            <g class="word" filter="url(#goo)">
+              <text class="ltr" style="--i:0" x="140.5" y="190">k</text>
+              <text class="ltr" style="--i:1" x="232.5" y="190">o</text>
+              <text class="ltr" style="--i:2" x="323.5" y="190">d</text>
+              <text class="ltr" style="--i:3" x="414.5" y="190">o</text>
+              <text class="ltr" style="--i:4" x="503" y="190">n</text>
             </g>
-            <circle class="ring pop float" style="--d:1.9s" cx="456" cy="76" r="9"/>
-            <path class="stem draw" style="--d:1.5s" d="M541,116 C558,104 556,84 571,82"/>
-            <circle class="ring pop" style="--d:1.9s" cx="580" cy="84" r="7"/>
-            <ellipse class="blob pop" style="--d:1.7s" cx="414" cy="232" rx="30" ry="9"/>
-            <circle class="ring pop float" style="--d:2s" cx="236" cy="238" r="7"/>
-          </g>
-        </svg>
-        <p class="intro-tag"><span>reading the codon code of gene expression</span></p>
-        <a class="scroll-cue" href="#top" aria-label="Scroll down"><span>scroll</span><i></i></a>
+            <g class="deco">
+              <path class="leaf pop" style="--d:1.2s" d="M84,150 Q72,122 46,124 Q56,146 84,150Z M84,150 Q72,178 46,176 Q56,154 84,150Z"/>
+              <path class="stem draw" style="--d:1.3s" d="M117,70 C115,52 106,42 97,38"/>
+              <circle class="ring pop" style="--d:1.7s" cx="92" cy="33" r="7"/>
+              <circle class="ring pop float" style="--d:1.5s" cx="232" cy="80" r="8"/>
+              <path class="stem draw" style="--d:1.4s" d="M357,70 C357,52 347,43 337,39"/>
+              <circle class="ring pop" style="--d:1.8s" cx="331" cy="34" r="7"/>
+              <g class="pop" style="--d:1.6s">
+                <path class="leaf" d="M373,72 Q366,36 406,20 Q410,58 373,72Z"/>
+                <path class="vein" d="M377,66 Q388,46 401,28"/>
+              </g>
+              <circle class="ring pop float" style="--d:1.9s" cx="456" cy="76" r="9"/>
+              <path class="stem draw" style="--d:1.5s" d="M541,116 C558,104 556,84 571,82"/>
+              <circle class="ring pop" style="--d:1.9s" cx="580" cy="84" r="7"/>
+              <ellipse class="blob pop" style="--d:1.7s" cx="414" cy="232" rx="30" ry="9"/>
+              <circle class="ring pop float" style="--d:2s" cx="236" cy="238" r="7"/>
+            </g>
+          </svg>
+        <p class="stage-tag">reading the codon code of gene expression</p>
+        <a class="btn btn-light" href="#analyzer" data-open-analyzer>Open the analyzer</a>
       </div>
 
-      <div class="layer l-far" aria-hidden="true"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0 120 C180 60 320 90 480 66 S800 14 980 60 S1300 40 1440 80 V200 H0Z"/></svg></div>
-      <div class="layer l-mid" aria-hidden="true"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0 132 C160 84 300 150 470 112 S760 52 940 100 S1260 82 1440 122 V200 H0Z"/><path d="M160 112 l20 -58 l20 58Z M136 126 l15 -40 l15 40Z M1080 102 l22 -62 l22 62Z M1116 108 l15 -42 l15 42Z M690 98 l17 -48 l17 48Z M716 100 l12 -32 l12 32Z"/></svg></div>
-      <div class="layer l-near" aria-hidden="true"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0 152 C220 96 380 172 600 132 S980 84 1180 132 S1360 122 1440 112 V200 H0Z"/><ellipse cx="270" cy="112" rx="34" ry="30"/><ellipse cx="306" cy="124" rx="24" ry="22"/><path d="M266 136h8v20h-8Z"/><ellipse cx="1220" cy="96" rx="38" ry="34"/><ellipse cx="1176" cy="112" rx="24" ry="22"/><path d="M1216 124h8v20h-8Z"/></svg></div>
-      <div class="layer l-front" aria-hidden="true"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0 110 C240 40 420 140 720 90 S1200 30 1440 100 V200 H0Z"/></svg></div>
+      <a class="side-world side-left" href="#how" data-move="left" aria-label="How it works">
+        <span class="side-orb"><img src="https://images.unsplash.com/photo-1508144322886-717c284ab392?w=500&amp;h=500&amp;fit=crop&amp;q=70&amp;auto=format" alt=""></span>
+        <span class="side-label">How it works</span>
+      </a>
+      <a class="side-world side-right" href="#model" data-move="right" aria-label="Model">
+        <span class="side-label">Model</span>
+        <span class="side-orb"><img src="https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=500&amp;h=500&amp;fit=crop&amp;q=70&amp;auto=format" alt=""></span>
+      </a>
+
+      <div class="stage-left" data-move="copy">
+        <p class="kicker">The green planet</p>
+        <h2>Kodon</h2>
+        <p>Every gene is written in codons, and the busiest genes in a cell choose their codons like a well-kept forest: neat, fast, and always the same favourites. Kodon reads those habits from any <em>E. coli</em> gene and tells you whether it is likely to be highly or lowly expressed.</p>
+        <a class="btn btn-light" href="#how">How it works</a>
+      </div>
+
+      <div class="world" data-move="world">
+        <div class="world-spin">
+          <img src="https://images.unsplash.com/photo-1498925008800-019c7d59d903?w=2200&amp;h=2200&amp;fit=crop&amp;q=72&amp;auto=format" alt="A dense green forest seen from above">
+        </div>
+      </div>
+
+      <div class="stage-final" data-move="final">
+        <span class="final-rule"></span>
+        <p>Down in the canopy, every tree is a gene and every leaf a codon. A Random Forest of 200 decision trees, trained in Python on real NCBI genes, learns which codons the highly expressed genes prefer.</p>
+      </div>
+
+      <a class="scroll-cue" href="#top" data-move="cue" aria-label="Scroll down"><i></i></a>
     </div>
   </section>
 
@@ -260,7 +286,7 @@
     </section>
   </main>
 
-  <footer class="footer"><div class="wrap"><span class="footer-logo">kodon</span> · made with <svg class="ico ico-heart" aria-hidden="true"><use href="#i-heart"/></svg> by <strong>Ritu Ramesh</strong> · Codon usage bias &amp; gene expression in E. coli</div></footer>
+  <footer class="footer"><div class="wrap"><span class="footer-logo">kodon</span> · made with <svg class="ico ico-heart" aria-hidden="true"><use href="#i-heart"/></svg> by <strong>Ritu Ramesh</strong> · Codon usage bias &amp; gene expression in E. coli · Forest photos from <a href="https://unsplash.com/photos/bird-eye-view-photography-of-a-green-trees-uMWPrcRsrto">Unsplash</a></div></footer>
 
   <div class="portal" id="portal" aria-hidden="true">
     <div class="portal-inner">
@@ -274,7 +300,7 @@
     </div>
   </div>
 
-  <script src="intro.js?v=13"></script>
+  <script src="intro.js?v=14"></script>
   <script src="model-data.js?v=13"></script>
   <script src="app.js?v=13"></script>
 </body>
