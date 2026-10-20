@@ -57,10 +57,11 @@ In Google Colab, upload the notebook and run `!pip install biopython` first.
 | `notebook/requirements.txt` | Python libraries |
 | `data/kodon_dataset.csv` | The 208 labelled genes with all 123 features and their train / test split |
 | `model-data.js` | Trained scikit-learn forest, exported by the notebook |
-| `index.html` | Page content (opening, analyzer, how it works, model results) |
+| `index.html` | The four pages: Home (cinematic opening), Analyzer, How it works, Model |
 | `style.css` | Look and colours |
 | `app.js` | Feature calculation in the browser and prediction with the exported forest |
-| `intro.js` | Cinematic opening (film, drifting mist, grain, scroll fly-through), scroll reveals and analyzer transition |
+| `intro.js` | Page switching (Home / Analyzer / How it works / Model), cinematic opening, scroll reveals and analyzer transition |
+| `LICENSE` | MIT License |
 
 Made by Ritu Ramesh.
 

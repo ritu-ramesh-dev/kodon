@@ -296,6 +296,8 @@ table.cm td.bad { color: var(--leg); }
 /* ---------- footer ---------- */
 .footer { padding: 32px 0; background: var(--kombu); color: var(--tan); font-size: .95rem; text-align: center; }
 .footer strong { color: var(--bone); }
+.footer a { color: var(--bone); text-decoration-color: var(--moss); }
+.footer a:hover { color: var(--tan); }
 .footer-logo { font-size: 1.5rem; vertical-align: -3px; color: var(--bone); }
 
 /* ---------- scroll reveals: content slides up out of a mask (no fading) ---------- */

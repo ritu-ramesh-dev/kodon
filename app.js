@@ -202,6 +202,8 @@ function run() {
   const invalid = records.reduce((s, r) => s + r.invalid, 0);
   if (invalid) notes.push(`${invalid} non-ACGT character(s) were removed.`);
   if (tooShort.length) notes.push(`${tooShort.length} sequence(s) were too short and skipped.`);
+  const brief = results.filter(r => r.total < 100).length;
+  if (brief) notes.push(`${brief} sequence(s) have fewer than 100 codons, so the prediction is less reliable.`);
   if (!results.length) { msg.textContent = "No valid sequence found."; render(); return; }
   msg.className = "msg ok";
   msg.textContent = `Analyzed ${results.length} sequence(s). ${notes.join(" ")}`;
